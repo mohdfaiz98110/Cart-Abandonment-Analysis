@@ -1,0 +1,23 @@
+# ── DATA: never commit. Raw CSVs are ~400MB/month; GitHub rejects >100MB files.
+data/raw/*
+!data/raw/PUT_KAGGLE_CSVS_HERE.txt
+data/sample/
+
+# ── Generated artefacts that are big or rebuildable
+output/*.db
+output/dashboard_*.csv
+
+# ── KEPT ON PURPOSE: output/*.png and output/findings.md are the portfolio.
+#    Recruiters read the repo, they don't run it. Charts must be committed.
+
+# ── Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# ── OS
+.DS_Store
+Thumbs.db
