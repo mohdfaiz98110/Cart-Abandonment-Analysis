@@ -1,4 +1,4 @@
-# Cart Abandonment Analysis — Online Cosmetics Retailer
+# Cart Abandonment Analysis  Online Cosmetics Retailer
 
 Analysis of **3.9 million user events** from a real e-commerce store (REES46 cosmetics
 shop, October 2019) to answer one question: *why do customers fill baskets and then
@@ -6,13 +6,13 @@ leave without buying?*
 
 **Headline: 87.5% of items added to a cart were never purchased.**
 
-The interesting part is *why* — and the most popular explanation turned out to be wrong.
+The interesting part is *why* and the most popular explanation turned out to be wrong.
 
 ---
 
 ## The finding that changed the recommendation
 
-Most cart-abandonment analyses report a single blended rate. Splitting it in two
+Most cart abandonment analyses report a single blended rate. Splitting it in two
 changes what you'd actually do about it:
 
 | Outcome | Items | Share |
@@ -22,7 +22,7 @@ changes what you'd actually do about it:
 | Purchased | 122,952 | 12.5% |
 
 **Silent abandonment is 3.3× active rejection.** Two thirds of customers never went
-back to the basket at all — they didn't reject anything, they simply left.
+back to the basket at all, they didn't reject anything, they simply left.
 
 A discount aimed at that group is aimed at people who never looked at the price again.
 
@@ -30,7 +30,7 @@ A discount aimed at that group is aimed at people who never looked at the price 
 
 ---
 
-## Testing the obvious explanation — and rejecting it
+## Testing the obvious explanation and rejecting it
 
 The intuitive hypothesis is that expensive items get abandoned more. It doesn't hold:
 
@@ -42,7 +42,7 @@ The intuitive hypothesis is that expensive items get abandoned more. It doesn't 
 | 20–40 | 16,860 | 88.1% |
 | 40+ | 10,652 | 87.5% |
 
-**A 2.2-point spread across a 10× price range, and not even monotonic** — the 10–20
+**A 2.2 point spread across a 10× price range, and not even monotonic**  the 10 to 20
 band performs best. Price is not driving this behaviour, which removes discounting
 from the recommendation set.
 
@@ -53,7 +53,7 @@ from the recommendation set.
 ## Customers don't come back either
 
 Weekly cohorts within October. **Only 9.7% of new visitors return the following
-week**, near-identical across all four cohorts — so this is structural, not a bad week.
+week**, near identical across all four cohorts, so this is structural, not a bad week.
 
 ![Weekly cohort retention](weekly_cohort.jpeg)
 
@@ -65,7 +65,7 @@ event.**
 
 ## Dashboard
 
-Interactive Tableau dashboard — funnel, outcome split, price-band breakdown, with a
+Interactive Tableau dashboard, funnel, outcome split, price-band breakdown, with a
 price filter.
 
 ![Tableau dashboard](Dashboard.png)
@@ -74,13 +74,13 @@ price filter.
 
 ## Recommendations
 
-1. **Basket-recovery messaging** targeting the 658,482 silently abandoned items — not
+1. **Basket recovery messaging** targeting the 658,482 silently abandoned items not
    the 198,417 actively removed. Different failure modes need different fixes.
-2. **Persistent baskets.** With a 9.7% week-one return rate, a surviving basket is the
+2. **Persistent baskets.** With a 9.7% week one return rate, a surviving basket is the
    only remaining link to a customer who won't otherwise be seen again.
 3. **Do not discount.** Abandonment is flat across a 10× price range.
 
-**Validation:** A/B test on the silent-abandonment cohort — half receive a basket
+**Validation:** A/B test on the silent-abandonment cohort, half receive a basket
 reminder within 24 hours, measure purchase rate over 7 days, with unsubscribe rate as
 a guardrail.
 
@@ -109,7 +109,7 @@ dim_product           41,614
 dim_brand                241
 ```
 
-`fact_cart_items` is the analytical core and doesn't exist in the source data — each
+`fact_cart_items` is the analytical core and doesn't exist in the source data. Each
 row is one item someone put in a basket, tagged with what happened to it.
 
 ### Two decisions worth explaining
@@ -126,8 +126,8 @@ dwell are marked `is_bot` and filtered per query, keeping the decision reversibl
 ## Limitations
 
 1. **One month of data.** No seasonality, no long-run retention.
-2. **Weekly cohorts, not monthly.** A one-month window collapses monthly cohorts to a
-   single cell. Weekly gives four groups but only measures short-run return — and
+2. **Weekly cohorts, not monthly.** A one month window collapses monthly cohorts to a
+   single cell. Weekly gives four groups but only measures short-run return and
    beauty repurchase cycles run longer than a week. Reported as *week-1 return rate*,
    never "retention".
 3. **The first cohort is contaminated.** Everyone active in week 1 counts as "new"
